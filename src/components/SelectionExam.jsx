@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { SelectionWrapper } from "./Common";
 
-const SelectionExam = () => {
+const SelectionExam = (props) => {
     const selection = ["전혀 그렇지 않다", "그렇지 않다", "보통이다", "그렇다", "매우 그렇다"]
 
     return (
-        <SelectionWrapper>
+        <SelectionWrapper border={props.border}>
             {selection.map((item, index) => {
                 return (
                     <Container key={index}>
