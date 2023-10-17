@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SelectionWrapper = styled.div`
-	border: 1px solid #21487f;
+    border: ${props => props.border ===  true ? "1px solid #21487f" : "none"};
 	border-radius: 35px;
 	padding: 15px 30px;
 	width: fit-content;
@@ -13,9 +13,6 @@ export const SelectionWrapper = styled.div`
 export const ContentsWrapper = styled.div`
     border: 2px solid  #21487f;
     border-radius: 10px;
-    // &:last-child {
-    //     border-bottom: none;
-    // }
 `
 
 export const ContentContainer = styled.div`
@@ -32,4 +29,14 @@ export const FlexBoxSBwithBorder = styled.div`
     &:last-child {
         border-bottom: none;
     }
+`
+
+export const Content = styled.div`
+    align-self: center;
+    margin-top: ${props => props.marginTop ? props.marginTop : ""};
+`
+
+export const FlexContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
 `
