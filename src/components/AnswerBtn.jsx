@@ -8,7 +8,7 @@ const AnswerBtn = (props) => {
         <SelectionWrapper border={props.border} id={props.index}>
             {selection.map((item, index) => {
                 return (
-                    <Container key={index} id={index} onClick={props.onClick} clicked={props.clicked === index}>
+                    <Container key={index} id={index+1} onClick={props.onClick} clicked={props.clicked === index+1}>
                         {item}
                     </Container>
                 )
@@ -20,10 +20,11 @@ const AnswerBtn = (props) => {
 export default AnswerBtn;
 
 const Container = styled.div`
+    font-size: 0.8rem;
     text-align : center;
     border : 2px solid #21487f;
     border-radius : 20px;
-    width: 120px;
+    width: 6rem;
     padding : 10px 10px;  
     cursor: pointer;
     background-color: ${props => props.clicked ? "#21487f" : "#ffffff"};
