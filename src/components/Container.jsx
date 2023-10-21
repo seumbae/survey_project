@@ -13,6 +13,7 @@ const Container = (props) => {
 			gap={props.gap}
             alignSelf={props.alignSelf}
             padding={props.padding}
+			flexWrap={props.flexWrap}
 		>
 			{props.children}
 		</Root>
@@ -34,4 +35,5 @@ const Root = styled.div`
 	margin: ${(props) => (props.margin ? props.margin : "")};
 	gap: ${(props) => (props.gap ? props.gap + "px" : "")};
     align-self: ${(props) => (props.alignSelf ? props.alignSelf : "")};
+	flex-wrap: ${(props) => (props.flexWrap ? props.flexWrap : "")};
 `;
