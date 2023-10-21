@@ -23,6 +23,7 @@ const Container = styled.div`
     text-align : center;
     border : 2px solid #21487f;
     border-radius : 20px;
-    width: 120px;
     padding : 10px 10px;
+    width: 6rem;
+    font-size: 0.8rem;
 `
