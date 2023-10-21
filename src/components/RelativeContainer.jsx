@@ -7,9 +7,7 @@ const RelativeContainer = ({children}) => {
 export default RelativeContainer;
 
 const Container = styled.div`
-    // display: flex;
     width:100%;
     height: inherit;
     position: relative;
 `
-
