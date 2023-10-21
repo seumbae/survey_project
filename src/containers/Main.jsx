@@ -19,8 +19,7 @@ const Main = () => {
 			justifyContent="center"
 			gap="20"
 		>
-			<h1>인성검사 페이지 v1</h1>
-			<span>로고 넣을자리</span>
+			<h1>인성검사 기반 보안 성향 테스트</h1>
 			<MainButton
 				content="설문 시작하기"
 				flag={false}
