@@ -23,4 +23,17 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
+
+    @media (min-width: 1024px){
+      padding: 10px 20px;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+      font-size: 1.2rem;
+  }
+
+  @media (max-width: 767px) {
+      padding: 5px 10px;
+      font-size: 0.8rem;
+  }
 `
