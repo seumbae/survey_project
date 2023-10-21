@@ -15,8 +15,10 @@ const Start = () => {
 	return (
 		<RelativeContainer>
 			<ContentContainer>
-				<Contents fontSize="2rem" color="red">
+				<Contents>
 					지금부터 개인 성향 관련 검사를 실시합니다.
+					<br />
+					총 19문항을 3분 30초 동안 풀어주시면 됩니다.
 					<br />
 					다음 창으로 넘어가시면 예시 문제가 실행됩니다.
 				</Contents>
