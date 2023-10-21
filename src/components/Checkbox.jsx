@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const Checkbox = ({children, onChange, value, checked}) => {
+const Checkbox = ({children, onChange, value, checked, bold}) => {
     return (
-        <Label>
+        <Label bold={bold}>
             {children}
             <Input value={value} type="checkbox" onChange={onChange} checked={checked}/>
         </Label>
@@ -26,4 +26,17 @@ const Input = styled.input`
 const Label = styled.label`
     display: flex;
     align-items: center;
+    font-weight: ${props => props.bold ? "bold" : ""};
+
+    @media (min-width: 1024px){
+        font-size:1.3rem;
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+        font-size: 1.5rem;
+    }
+
+    @media (max-width: 767px) {
+        font-size: 1rem;
+    }
 `
