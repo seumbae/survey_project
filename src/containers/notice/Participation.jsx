@@ -1,9 +1,9 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Contents from "../../components/Contents";
 import Container from "../../components/Container";
 import MainButton from "../../components/MainButton";
 import Checkbox from "../../components/Checkbox";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import BorderBox from "../../components/BorderBox";
 import Title from "../../components/Title";
 
@@ -54,20 +54,24 @@ const Participation = () => {
 		>
 			<BorderBox>
 				<Title>연구 참여 방법</Title>
-				<Contents fontSize="1.5rem">
+				<Contents color="#606060">
 					만일 귀하가 참여의사를 밝혀 주시면 다음과 같은 기능이 진행될 것입니다.
 					<br />
-					<Contents fontSize="2rem" color="red">
+					<Contents color="#606060">
 						인적사항 기재 후 예비 문항을 푸신 후 실제 연구에 사용될 개인 성향
-						관련 검사,
-						<br />
-						{/* TODO: 문항 수 , 00분*/}
-						보안 행동 검사 총 2세트의 000문항을 00분의 시간제한 안에서 풀게 됩니다.
+						관련 검사, 보안 행동 검사
+						<br />총 2세트의 19문항, 63문항을 3분 30초, 10분 30초의 시간제한
+						안에서 풀게 됩니다.
 					</Contents>
 					<br />
-					답변의 경우 Likert 5점 척도를 활용하여 [전혀 그렇지 않다 | 그렇지 않다 | 보통이다 | 그렇다 | 매우 그렇다]로 선택하실 수 있습니다.
+					답변의 경우 Likert 5점 척도를 활용하여{" "}
+					<span style={{ color: "#242424" }}>
+						[전혀 그렇지 않다 | 그렇지 않다 | 보통이다 | 그렇다 | 매우 그렇다]
+					</span>
+					로 선택하실 수 있습니다.
 					<br />
-					스마트폰보다는 컴퓨터 사용을 권장드리며 총 소요시간은 20분 정도로 예상됩니다.
+					스마트폰보다는 컴퓨터 사용을 권장드리며 총 소요시간은 최대 20분 정도로
+					예상됩니다.
 				</Contents>
 			</BorderBox>
 
@@ -77,10 +81,10 @@ const Participation = () => {
 				alignItems="center"
 				alignSelf="center"
 			>
-				<Contents fontSize="2rem">
+				<Title>
 					귀하께서는 연구 방법을 숙지하였으며 연구에 참여할 것을
 					동의하시겠습니까?
-				</Contents>
+				</Title>
 				<Contents>
 					동의함에 체크하시면 연구의 방법이 귀하에게 설명되었음을 뜻하며 또한
 					귀하가 연구에 참여할 것에 동의하셨음을 의미합니다.
