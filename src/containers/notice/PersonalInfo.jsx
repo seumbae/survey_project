@@ -7,6 +7,7 @@ import Email from "../../components/Email";
 import MainButton from "../../components/MainButton";
 import Table from "../../components/Table";
 import Title from "../../components/Title";
+import { postPersonalInfo } from "../../services/sevice";
 
 const PersonalInfo = () => {
 	const navigate = useNavigate();
@@ -37,6 +38,7 @@ const PersonalInfo = () => {
 	};
 
 	const onClickHandler = (index, e) => {
+		const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,}$/i;
 		if (checked === "") alert("동의 여부를 체크해주세요.");
 		else if (checked === "0") {
 			alert("설문을 종료합니다.");
@@ -45,11 +47,36 @@ const PersonalInfo = () => {
 			if (sex === "") alert("성별을 체크해주세요.");
 			else if (age === "") alert("나이를 체크해주세요.");
 			else if (job === "") alert("업종을 체크해주세요.");
-			else if (email === "") alert("이메일 주소를 입력해주세요.");
+			else if (email === "" || !regEmail.test(email)) alert("이메일 주소를 확인해주세요.");
 			else {
 				e.preventDefault();
-				// TODO: 데이터 보내기, userId저장하기
-				navigate(`/notice/${index}`, { state: { idx: index } });
+
+				const data = {
+					Age: age,
+					Job: job,
+					EmailAdress: email,
+					SurveyAgree: 1,
+					IndAgree: checked,
+					Sex: sex,
+				};
+
+				postPersonalInfo(data)
+					.then((res) => {
+						if (res.status === 200) {
+							localStorage.setItem("userId", res.data.id);
+							navigate(`/notice/${index}`, {
+								state: { flag: true, idx: index },
+							});
+						} else {
+							throw new Error(
+								"서버의 오류가 발생했습니다. 관리자에게 문의하십시오."
+							);
+						}
+					})
+					.catch((err) => {
+						alert("현재 서버의 오류가 발생했습니다. 관리자에게 문의하십시오.");
+						navigate("/");
+					});
 			}
 		}
 	};
@@ -65,27 +92,20 @@ const PersonalInfo = () => {
 			<Container
 				width="100%"
 				display="flex"
-				flexDirection="row"
+				flexDirection="column"
 				justifyContent="flex-start"
+				gap="16"
 			>
-				<Container
-					display="flex"
-					flexDirection="column"
-					alignItems="flex-start"
-					width="20%"
-					gap="20"
-				>
-					<Contents>성별</Contents>
-					<Contents>나이</Contents>
-					<Contents>업종</Contents>
-					<Contents>이메일 주소</Contents>
-				</Container>
-				<Container display="flex" flexDirection="column" gap="20">
+				<Container display="flex" flexDirection="row" alignItems="center">
+					<Contents width="20%">
+						성별
+					</Contents>
 					<Container
 						display="flex"
 						flexDirection="row"
 						justifyContent="flex-start"
-						gap="20"
+						gap="16"
+						flexWrap="wrap"
 					>
 						<Checkbox
 							value="male"
@@ -102,11 +122,17 @@ const PersonalInfo = () => {
 							여성
 						</Checkbox>
 					</Container>
+				</Container>
+				<Container display="flex" flexDirection="row" alignItems="center">
+					<Contents width="20%">
+						나이
+					</Contents>
 					<Container
 						display="flex"
 						flexDirection="row"
 						justifyContent="flex-start"
-						gap="20"
+						gap="16"
+						flexWrap="wrap"
 					>
 						<Checkbox
 							value="20"
@@ -137,46 +163,52 @@ const PersonalInfo = () => {
 							50대 이상
 						</Checkbox>
 					</Container>
+				</Container>
+				<Container display="flex" flexDirection="row" alignItems="center">
+					<Contents width="20%">
+						직업
+					</Contents>
 					<Container
 						display="flex"
 						flexDirection="row"
 						justifyContent="flex-start"
-						gap="20"
+						gap="16"
+						flexWrap="wrap"
 					>
 						<Checkbox
-							value="경영사무"
-							checked={job === "경영사무"}
+							value="학생"
+							checked={job === "학생"}
 							onChange={handleJobChange}
 						>
-							경영사무
+							학생
 						</Checkbox>
 						<Checkbox
-							value="IT/보안"
-							checked={job === "IT/보안"}
+							value="직장인"
+							checked={job === "직장인"}
 							onChange={handleJobChange}
 						>
-							IT/보안
+							직장인
 						</Checkbox>
 						<Checkbox
-							value="마케팅"
-							checked={job === "마케팅"}
+							value="무직"
+							checked={job === "무직"}
 							onChange={handleJobChange}
 						>
-							마케팅
+							무직
 						</Checkbox>
 						<Checkbox
-							value="영업"
-							checked={job === "영업"}
+							value="프리랜서"
+							checked={job === "프리랜서"}
 							onChange={handleJobChange}
 						>
-							영업
+							프리랜서
 						</Checkbox>
 						<Checkbox
-							value="연구"
-							checked={job === "연구"}
+							value="자영업자"
+							checked={job === "자영업자"}
 							onChange={handleJobChange}
 						>
-							연구
+							자영업자
 						</Checkbox>
 						<Checkbox
 							value="기타"
@@ -186,14 +218,15 @@ const PersonalInfo = () => {
 							기타
 						</Checkbox>
 					</Container>
-					<Container
-						display="flex"
-						flexDirection="row"
-						justifyContent="flex-start"
-						gap="20"
-					>
-						<Email onChange={handleEmailChange} />
-					</Container>
+				</Container>
+				<Container
+					display="flex"
+					flexDirection="row"
+					flexWrap="wrap"
+					alignItems="center"
+				>
+					<Contents width="20%">이메일 주소</Contents>
+					<Email onChange={handleEmailChange} />
 				</Container>
 			</Container>
 			<Container display="flex" flexDirection="column" width="100%" gap="20">
@@ -204,11 +237,13 @@ const PersonalInfo = () => {
 					width="inherit"
 					gap="20"
 					justifyContent="center"
+					flexWrap="wrap"
 				>
 					<Checkbox
 						value="1"
 						checked={checked === "1"}
 						onChange={handleCheckedChange}
+						bold={true}
 					>
 						개인정보 수집 및 이용에 동의함
 					</Checkbox>
@@ -216,18 +251,26 @@ const PersonalInfo = () => {
 						value="0"
 						checked={checked === "0"}
 						onChange={handleCheckedChange}
+						bold={true}
 					>
 						개인정보 수집 및 이용에 동의하지 않음
 					</Checkbox>
 				</Container>
 			</Container>
-			<Container alignSelf="end">
+			<Container display="flex" flexDirection="column" width="100%">
+				<Container alignSelf="end">
 					<MainButton
 						content="다음"
 						flag={true}
 						onClick={(e) => onClickHandler(3, e)}
 					/>
 				</Container>
+				<Container alignSelf="end">
+					<Contents color="#888888">
+						작성 후 다음을 눌러주시면 인성검사 예시문제가 진행됩니다.
+					</Contents>
+				</Container>
+			</Container>
 		</Container>
 	);
 };
