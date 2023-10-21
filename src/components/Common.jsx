@@ -8,6 +8,7 @@ export const SelectionWrapper = styled.div`
 	display: flex;
 	gap: 20px;
 	align-self: end;
+    flex-wrap: wrap;
 `;
 
 export const ContentsWrapper = styled.div`
@@ -16,16 +17,18 @@ export const ContentsWrapper = styled.div`
 `
 
 export const ContentContainer = styled.div`
+    font-size: 0.9rem;
     padding: 10px 20px;
     padding-right: 0;
 `
 
-// TODO: 이름 변경하고 padding 추가해야함
 export const FlexBoxSBwithBorder = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #000000;
+    flex-wrap: wrap;
+
     &:last-child {
         border-bottom: none;
     }
