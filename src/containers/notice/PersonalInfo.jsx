@@ -54,7 +54,7 @@ const PersonalInfo = () => {
 				const data = {
 					Age: age,
 					Job: job,
-					EmailAdress: email,
+					EmailAddress: email,
 					SurveyAgree: 1,
 					IndAgree: checked,
 					Sex: sex,
