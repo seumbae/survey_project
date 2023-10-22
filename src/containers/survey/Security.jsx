@@ -40,7 +40,7 @@ const Security = () => {
 					setUserId(localStorage.getItem("userId"));
 					setChecked(
 						Object.fromEntries(
-							Array.from({ length: res.data.length }, (_, i) => [i + 1, -1])
+							Array.from({ length: res.data.length }, (_, i) => [i + 20, -1])
 						)
 					);
 				}
@@ -74,7 +74,7 @@ const Security = () => {
 	const onNextHandler = (e) => {
 		const start = (current - 1) * delimiter;
 		const end = start + delimiter;
-
+		console.log(checked)
 		if (
 			Object.values(checked)
 				.slice(start, end)
